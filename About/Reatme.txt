@@ -1,0 +1,60 @@
+i'm bad at programming
+
+    RimVore2 - Interactions should go under RV2 and it's addons.
+
+    This sub-mod lets preds and prey talk to eachother. Chitchat, insults, nuzzling, it's all here.
+    
+    Every prey can potentialy interact at once, and Pawn_InteractionsTracker.lastInteractionTime is private, so interactions can happen every rare tick. It's fine tho.
+
+   	-No-one's talking to their belly pets!
+		[ Both the pred and the prey need to be able to talk. ]
+		In other words, they need to be awake, have a tongue and not be in shock.
+		The pred also needs to be off their random interaction cooldown, and doing something that allows conversation (not sleeping).
+		Also, it's only a 1/8 chance every rare tick, and scales down with number of prey. 
+
+		[ Almost every interation only works in endo, and there are no fatal-only interactions. ]
+		Fatal vore freaks me out. Someone else is gonna have to write that. Sorry.
+	
+	-How do I make interactions?
+		[ Mostly the same way as vanilla interactions. ]
+		Start off with <RV2_Interactions.VoreSocialInteractionDef Parent="RV2I_Base">.
+		Thoughts, xp gain, and symbols/motes all work the same as regular interactions.
+		With the rules strings, the predator is *always* the initiatior, and prey is always recipiant.
+
+		They also have interaction rules, for determining if they're valid. Defaults are shown below.
+		If the value is a 0, 1 or 2, then 0 is false, 1 is true, and 2 is ignore. The alternitive is 6 more checks to keep track of.
+			
+       				<weight>10.0</weight>			(Larger weights are chosen more often: strong interactions should be rare; greater than 0)
+
+				<willing>2</willing>			(If both parties consented)
+				<struggle>0</struggle>			(If the prey is strugging)
+				<hostile>0</hostile>			(If the pred and prey are enemies)
+
+       				<minOpinion>-25</minOpinion>		(How high opinion needs to be for an interaction to happen: checks both pred and prey; -100 to 100; friends at 25 and rivals at -25)
+       				<maxOpinion>100</maxOpinion>		(Should only be limited for "mean" interactions; animals have opinion based on colony relation and animal skill)
+
+       				<endo>1</endo>				(If the voregoal is endo; false checks for fatal)
+
+       				<sapientPred>1</sapientPred>		(If they are humanoid or a .ColonistPlayerControlled() (Sentiant Animals is a cool mod, it fully works with Rimvore too))
+        			<sapientPrey>1</sapientPrey>		(If false, will still be valid if the pawn is an animal, even if they're sapient (titanboas are great when you can just tell them "nom that dude"))
+
+				<compatOnly>false</compatOnly>		(If the pred and prey are romanticaly compatiable)
+				<loversOnly>false</loversOnly>		(If the pred and prey are romanticly involved)
+
+				<nuzzlePred>false</nuzzlePred>		(If the pred is a creature that can nuzzle; has a chance to be true, based on average nuzzle hours)
+				<nuzzlePrey>false</nuzzlePrey>
+
+				<predatorPred>false</predatorPred>	(.RaceProps.predator; ignored if false; I fully understand how silly this one looks)
+				<predatorPrey>false</predatorPrey>
+
+				<farmPred>false</farmPred>		(.RaceProps.FenceBlocked; ignored if false)
+				<farmPrey>false</farmPrey>
+
+				<validGoals>				(Ignored if empty; <i>Hold</i>)
+				</validGoals>
+				<validTypes>	
+				</validTypes>
+
+		Simply have the def change what you need.
+
+   Now please tell Nocturn that he's a very good dire wolf, and that Rut appreciates being nuzzled in his belly very much. 

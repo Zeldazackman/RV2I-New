@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+
+  <RV2_Interactions.VoreSocialInteractionDef Abstract="True" Name="RV2I_Base">
+    <workerClass>RV2_Interactions.InteractionWorker_VoreChat</workerClass>
+	
+    <label>chitchat</label>
+    <symbol>Things/Mote/SpeechSymbols/Chitchat</symbol>
+    <initiatorThought>Chitchat</initiatorThought>
+    <recipientThought>Chitchat</recipientThought>
+	
+    <weight>10.0</weight>
+	
+    <willing>2</willing>
+    <struggle>0</struggle>
+    <hostile>0</hostile>
+	
+    <endo>1</endo>
+	
+    <minOpinion>-15</minOpinion>
+    <maxOpinion>100</maxOpinion>
+	
+    <sapientPred>1</sapientPred>
+    <sapientPrey>1</sapientPrey>
+	
+    <compatOnly>false</compatOnly>
+    <loversOnly>false</loversOnly>
+	
+    <nuzzlePred>false</nuzzlePred>
+    <nuzzlePrey>false</nuzzlePrey>
+	
+    <predatorPred>false</predatorPred>
+    <predatorPrey>false</predatorPrey>
+	
+    <farmPred>false</farmPred>
+    <farmPrey>false</farmPrey>
+	
+    <validGoals>
+	</validGoals>
+    <validTypes>
+	</validTypes>
+	
+  </RV2_Interactions.VoreSocialInteractionDef>
+
+  <RV2_Interactions.VoreSocialInteractionDef ParentName="RV2I_Base">
+    <defName>RV2I_Chitchat</defName>
+	
+    <initiatorXpGainSkill>Social</initiatorXpGainSkill>
+    <initiatorXpGainAmount>4</initiatorXpGainAmount>
+	
+    <recipientXpGainSkill>Social</recipientXpGainSkill>
+    <recipientXpGainAmount>4</recipientXpGainAmount>
+	
+    <logRulesInitiator>
+      <rulesStrings>
+        <li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [TalkTopicLight].</li>
+        <li>r_logentry->[INITIATOR_nameDef] [talkedabout] [TalkTopicLight] with [RECIPIENT_nameDef].</li>
+        <li>r_logentry(p=0.8)->[INITIATOR_nameDef] [teaseadd][teaseask] [RECIPIENT_nameDef] about [teasesubject].</li>
+        <li>r_logentry(p=2)->[INITIATOR_nameDef] [check] [internal].</li>
+
+        <li>talkedabout(p=4)->chatted about</li>
+        <li>talkedabout->shared a word about</li>
+        <li>talkedabout->spoke about</li>
+        <li>talkedabout->gabbed about</li>
+        <li>talkedabout->talked about</li>
+        <li>talkedabout->joked about</li>
+        <li>talkedabout->quipped about</li>
+
+        <li>talkedabout(p=4)->chatted about</li>
+        <li>talkedabout->shared a word about</li>
+        <li>talkedabout->spoke about</li>
+        <li>talkedabout->gabbed about</li>
+        <li>talkedabout->talked about</li>
+        <li>talkedabout->joked about</li>
+        <li>talkedabout->quipped about</li>
+		
+        <li>teaseadd->playfully </li>
+        <li>teaseadd->harmlessly </li>
+        <li>teaseadd-></li>
+        <li>teaseadd-></li>
+        <li>teaseadd-></li>
+		
+        <li>teaseask->teased</li>
+        <li>teaseask->joked with</li>
+        <li>teaseask->gaffed with</li>
+        <li>teaseask->told a joke with</li>
+		
+        <li>teasesubject->[RECIPIENT_possessive] flavor</li>
+        <li>teasesubject->[RECIPIENT_possessive] comfort</li>
+        <li>teasesubject->being full</li>
+        <li>teasesubject->being prey</li>
+        <li>teasesubject->belching</li>
+        <li>teasesubject->entrapment</li>
+        <li>teasesubject->captorism</li>
+        <li>teasesubject->perma vore</li>
+        <li>teasesubject->forgetting who [RECIPIENT_pronoun] ate</li>
+        <li>teasesubject->living colonies</li>
+		
+        <li>check->checked up on [RECIPIENT_nameDef]</li>
+        <li>check->asked if [RECIPIENT_nameDef] needed anything</li>
+        <li>check->made sure [RECIPIENT_nameDef] was comfortable</li>
+        <li>check->casually talked with [INITIATOR_possessive] prey</li>
+        <li>check->gently comforted [INITIATOR_possessive] prey</li>
+		
+        <li>internal->within [INITIATOR_objective]</li>
+        <li>internal->inside [INITIATOR_objective]</li>
+        <li>internal->trapped within [INITIATOR_objective]</li>
+        <li>internal->trapped inside [INITIATOR_objective]</li>
+        <li>internal->stowed within [INITIATOR_objective]</li>
+        <li>internal->stowed inside [INITIATOR_objective]</li>
+      </rulesStrings>
+    </logRulesInitiator>
+  </RV2_Interactions.VoreSocialInteractionDef>
+  
+  <RV2_Interactions.VoreSocialInteractionDef ParentName="RV2I_Base">
+    <defName>RV2I_DeepTalk</defName>
+	
+    <initiatorXpGainSkill>Social</initiatorXpGainSkill>
+    <initiatorXpGainAmount>4</initiatorXpGainAmount>
+	
+    <recipientXpGainSkill>Social</recipientXpGainSkill>
+    <recipientXpGainAmount>4</recipientXpGainAmount>
+	
+    <weight>0.25</weight>
+	
+    <minOpinion>25</minOpinion>
+	
+    <label>deep talk</label>
+    <workerClass>InteractionWorker_DeepTalk</workerClass>
+    <symbol>Things/Mote/SpeechSymbols/DeepTalk</symbol>
+    <initiatorXpGainAmount>10</initiatorXpGainAmount>
+    <initiatorThought>DeepTalk</initiatorThought>
+    <recipientThought>DeepTalk</recipientThought>
+	
+    <logRulesInitiator>
+      <rulesStrings>
+        <li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [subject].</li>
+        <li>r_logentry->[INITIATOR_nameDef] [talkedabout] [subject] with [RECIPIENT_nameDef].</li>
+
+        <li>talkedabout->communicated thoughts about</li>
+        <li>talkedabout->exchanged thoughts about</li>
+        <li>talkedabout->exchanged ideas about</li>
+        <li>talkedabout->shared views on</li>
+        <li>talkedabout->shared beliefs on</li>
+        <li>talkedabout->discussed the topic of</li>
+        <li>talkedabout->had a heartfelt conversation about</li>
+        <li>talkedabout->talked quietly about</li>
+        <li>talkedabout->talked deeply about</li>
+        <li>talkedabout->connected on the topic of</li>
+
+        <li>subject->[TalkTopicHeavy]</li>
+      </rulesStrings>
+    </logRulesInitiator>
+  </RV2_Interactions.VoreSocialInteractionDef>
+  
+  <RV2_Interactions.VoreSocialInteractionDef ParentName="RV2I_Base">
+    <defName>RV2I_SlightPred</defName>
+	
+    <initiatorXpGainSkill>Social</initiatorXpGainSkill>
+    <initiatorXpGainAmount>4</initiatorXpGainAmount>
+	
+    <weight>0.5</weight>
+	
+    <struggle>2</struggle>
+    <hostile>2</hostile>
+	
+    <endo>2</endo>
+	
+    <minOpinion>-100</minOpinion>
+    <maxOpinion>5</maxOpinion>
+	
+    <label>slight</label>
+    <workerClass>InteractionWorker_Slight</workerClass>
+    <symbol>Things/Mote/SpeechSymbols/Slight</symbol>
+    <recipientThought>Slighted</recipientThought>
+    <logRulesInitiator>
+      <rulesStrings>
+        <li>r_logentry->[INITIATOR_nameDef] [madefunof] [target]'s [PersonalCharacteristic].</li>
+
+        <li>target(p=4)->[RECIPIENT_nameDef]</li>
+        <li>target->[RECIPIENT_nameDef]'s [PersonFamily]</li>
+
+        <li>madefunof->made fun of</li>
+        <li>madefunof->disrespected</li>
+        <li>madefunof->subtly scorned</li>
+        <li>madefunof->subtly shamed</li>
+        <li>madefunof->spoke badly of</li>
+        <li>madefunof->spoke negatively of</li>
+        <li>madefunof->laughed at</li>
+        <li>madefunof->sniggered at</li>
+        <li>madefunof->implied negative things about</li>
+        <li>madefunof->belittled</li>
+        <li>madefunof->made a contemptuous remark about</li>
+        <li>madefunof->offered a backhanded compliment about</li>
+      </rulesStrings>
+    </logRulesInitiator>
+  </RV2_Interactions.VoreSocialInteractionDef>
+  
+  <RV2_Interactions.VoreSocialInteractionDef ParentName="RV2I_Base">
+    <defName>RV2I_SlightPrey</defName>
+	
+    <recipientXpGainSkill>Social</recipientXpGainSkill>
+    <recipientXpGainAmount>4</recipientXpGainAmount>
+	
+    <weight>0.5</weight>
+	
+    <struggle>2</struggle>
+    <hostile>2</hostile>
+	
+    <endo>2</endo>
+	
+    <minOpinion>-100</minOpinion>
+    <maxOpinion>5</maxOpinion>
+	
+    <label>slight</label>
+    <workerClass>InteractionWorker_Slight</workerClass>
+    <symbol>Things/Mote/SpeechSymbols/Slight</symbol>
+    <initiatorThought>Slighted</initiatorThought>
+    <logRulesInitiator>
+      <rulesStrings>
+        <li>r_logentry->[RECIPIENT_nameDef] [madefunof] [target]'s [PersonalCharacteristic].</li>
+
+        <li>target(p=4)->[INITIATOR_nameDef]</li>
+        <li>target->[INITIATOR_nameDef]'s [PersonFamily]</li>
+
+        <li>madefunof->made fun of</li>
+        <li>madefunof->disrespected</li>
+        <li>madefunof->subtly scorned</li>
+        <li>madefunof->subtly shamed</li>
+        <li>madefunof->spoke badly of</li>
+        <li>madefunof->spoke negatively of</li>
+        <li>madefunof->laughed at</li>
+        <li>madefunof->sniggered at</li>
+        <li>madefunof->implied negative things about</li>
+        <li>madefunof->belittled</li>
+        <li>madefunof->made a contemptuous remark about</li>
+        <li>madefunof->offered a backhanded compliment about</li>
+      </rulesStrings>
+    </logRulesInitiator>
+  </RV2_Interactions.VoreSocialInteractionDef>
+  
+  <RV2_Interactions.VoreSocialInteractionDef ParentName="RV2I_Base">
+    <defName>RV2I_InsultPred</defName>
+	
+    <initiatorXpGainSkill>Social</initiatorXpGainSkill>
+    <initiatorXpGainAmount>4</initiatorXpGainAmount>
+	
+    <weight>0.35</weight>
+	
+    <struggle>2</struggle>
+    <hostile>2</hostile>
+	
+    <endo>2</endo>
+	
+    <minOpinion>-100</minOpinion>
+    <maxOpinion>-15</maxOpinion>
+	
+    <label>insult</label>
+    <workerClass>InteractionWorker_Insult</workerClass>
+    <symbol>Things/Mote/SpeechSymbols/Insult</symbol>
+    <recipientThought>Insulted</recipientThought>
+    <logRulesInitiator>
+      <rulesStrings>
+        <li>r_logentry(p=3)->[INITIATOR_nameDef] [insulted] [target]'s [PersonalCharacteristic].</li>
+        <li>r_logentry->[INITIATOR_nameDef] compared [target] to a [insultcomparison].</li>
+        <li>r_logentry->[INITIATOR_nameDef] called [target] a [insultcomparison].</li>
+        
+        <li>target(p=4)->[RECIPIENT_nameDef]</li>
+        <li>target->[RECIPIENT_nameDef]'s [PersonFamily]</li>
+
+        <li>insulted(p=3)->insulted</li>
+        <li>insulted->openly insulted</li>
+        <li>insulted->loudly insulted</li>
+        <li>insulted->flagrantly insulted</li>
+        <li>insulted->directly insulted</li>
+        <li>insulted->viciously insulted</li>
+        <li>insulted->flagrantly disrespected</li>
+        <li>insulted->slandered</li>
+        <li>insulted->hurled invective about</li>
+        <li>insulted->derided</li>
+
+        <li>insultcomparison(p=2)->[Animal]</li>
+        <li>insultcomparison->[Enemy]</li>
+      </rulesStrings>
+    </logRulesInitiator>
+  </RV2_Interactions.VoreSocialInteractionDef>
+  
+  <RV2_Interactions.VoreSocialInteractionDef ParentName="RV2I_Base">
+    <defName>RV2I_InsultPrey</defName>
+	
+    <recipientXpGainSkill>Social</recipientXpGainSkill>
+    <recipientXpGainAmount>4</recipientXpGainAmount>
+	
+    <weight>0.35</weight>
+	
+    <struggle>2</struggle>
+    <hostile>2</hostile>
+	
+    <endo>2</endo>
+	
+    <minOpinion>-100</minOpinion>
+    <maxOpinion>-15</maxOpinion>
+	
+    <label>insult</label>
+    <workerClass>InteractionWorker_Insult</workerClass>
+    <symbol>Things/Mote/SpeechSymbols/Insult</symbol>
+    <initiatorThought>Insulted</initiatorThought>
+    <logRulesInitiator>
+      <rulesStrings>
+        <li>r_logentry(p=3)->[RECIPIENT_nameDef] [insulted] [target]'s [PersonalCharacteristic].</li>
+        <li>r_logentry->[RECIPIENT_nameDef] compared [target] to a [insultcomparison].</li>
+        <li>r_logentry->[RECIPIENT_nameDef] called [target] a [insultcomparison].</li>
+        
+        <li>target(p=4)->[INITIATOR_nameDef]</li>
+        <li>target->[INITIATOR_nameDef]'s [PersonFamily]</li>
+
+        <li>insulted(p=3)->insulted</li>
+        <li>insulted->openly insulted</li>
+        <li>insulted->loudly insulted</li>
+        <li>insulted->flagrantly insulted</li>
+        <li>insulted->directly insulted</li>
+        <li>insulted->viciously insulted</li>
+        <li>insulted->flagrantly disrespected</li>
+        <li>insulted->slandered</li>
+        <li>insulted->hurled invective about</li>
+        <li>insulted->derided</li>
+
+        <li>insultcomparison(p=2)->[Animal]</li>
+        <li>insultcomparison->[Enemy]</li>
+      </rulesStrings>
+    </logRulesInitiator>
+  </RV2_Interactions.VoreSocialInteractionDef>
+  
+  <RV2_Interactions.VoreSocialInteractionDef ParentName="RV2I_Base">
+    <defName>RV2I_Comfort</defName>
+    <label>comfort</label>
+    <symbol>Motes/BellyPat</symbol>
+    <recipientThought>RV2I_Comfort</recipientThought>
+	
+    <initiatorXpGainSkill>Social</initiatorXpGainSkill>
+    <initiatorXpGainAmount>4</initiatorXpGainAmount>
+	
+    <weight>2.0</weight>
+	
+    <willing>1</willing>
+    <minOpinion>30</minOpinion>
+	
+    <sapientPred>2</sapientPred>
+    <sapientPrey>2</sapientPrey>
+		
+    <logRulesInitiator>
+      <rulesStrings>
+        <li>r_logentry->[INITIATOR_nameDef] [gentleAdv][embraced] [prey].</li>
+
+        <li>gentleAdv(p=2)-></li>
+        <li>gentleAdv->gently </li>
+        <li>gentleAdv->carefully </li>
+        <li>gentleAdv->slowly </li>
+        <li>gentleAdv->sweetly </li>
+        <li>gentleAdv->lovingly </li>
+
+        <li>embraced(p=4)->held</li>
+        <li>embraced->embraced</li>
+        <li>embraced->hugged</li>
+        <li>embraced->embraced</li>
+        <li>embraced->caressed</li>
+        <li>embraced->cradled</li>
+		
+        <li>prey(p=4)->[RECIPIENT_nameDef][internal]</li>
+        <li>prey->[INITIATOR_possessive] prey[internal]</li>
+        <li>prey->[INITIATOR_possessive] occupant[internal]</li>
+		
+        <li>internal(p=5)-></li>
+        <li>internal-> within [INITIATOR_objective]</li>
+        <li>internal-> inside [INITIATOR_objective]</li>
+        <li>internal-> trapped within [INITIATOR_objective]</li>
+        <li>internal-> trapped inside [INITIATOR_objective]</li>
+        <li>internal-> stowed within [INITIATOR_objective]</li>
+        <li>internal-> stowed inside [INITIATOR_objective]</li>
+      </rulesStrings>
+    </logRulesInitiator>
+  </RV2_Interactions.VoreSocialInteractionDef>
+  
+  <RV2_Interactions.VoreSocialInteractionDef ParentName="RV2I_Base">
+    <defName>RV2I_PreySquirm</defName>
+    <label>squirm</label>
+    <symbol>Motes/BellyRub</symbol>
+    <initiatorThought>RV2I_Squirm_Pred</initiatorThought>
+    <recipientThought>RV2I_Squirm_Prey</recipientThought>
+	
+    <recipientXpGainSkill>Melee</recipientXpGainSkill>
+    <recipientXpGainAmount>4</recipientXpGainAmount>
+	
+    <weight>2.0</weight>
+	
+    <willing>1</willing>
+    <minOpinion>25</minOpinion>
+		
+    <logRulesInitiator>
+      <rulesStrings>
+        <li>r_logentry->[INITIATOR_nameDef] [shiver] as [prey] [squirm][inside].</li>
+
+        <li>shiver(p=4)->shivered</li>
+        <li>shiver->sighs</li>
+        <li>shiver->lightly bites [INITIATOR_possessive] lip</li>
+        <li>shiver->relaxes</li>
+        <li>shiver->adjusts</li>
+		
+        <li>prey(p=4)->[RECIPIENT_nameDef]</li>
+        <li>prey->[INITIATOR_possessive] prey</li>
+        <li>prey->[INITIATOR_possessive] meal</li>
+        <li>prey->[INITIATOR_possessive] snack</li>
+		
+        <li>squirm->squirms</li>
+        <li>squirm->wriggles</li>
+        <li>squirm->nuzzles</li>
+        <li>squirm->shuffles</li>
+        <li>squirm->rubs around</li>
+        <li>squirm->slowly rolls</li>
+        <li>squirm->gently writhes</li>
+        <li>squirm->gently pushes out</li>
+        <li>squirm->streches</li>
+		
+        <li>inside(p=4)-></li>
+        <li>inside-> within [INITIATOR_objective]</li>
+        <li>inside-> inside [INITIATOR_objective]</li>
+        <li>inside-> trapped within [INITIATOR_objective]</li>
+        <li>inside-> trapped inside [INITIATOR_objective]</li>
+        <li>inside-> stowed within [INITIATOR_objective]</li>
+        <li>inside-> stowed inside [INITIATOR_objective]</li>
+      </rulesStrings>
+    </logRulesInitiator>
+  </RV2_Interactions.VoreSocialInteractionDef>
+  
+  <RV2_Interactions.VoreSocialInteractionDef ParentName="RV2I_Base">
+    <defName>RV2I_Nuzzle_Pred</defName>
+    <label>nuzzle</label>
+    <symbol>Motes/NuzzleBelly</symbol>
+    <interactionMote>Mote_Thought</interactionMote>
+    <recipientThought>RV2I_Predator_AnimalNuzzle</recipientThought>
+	
+    <recipientXpGainSkill>Animals</recipientXpGainSkill>
+    <recipientXpGainAmount>4</recipientXpGainAmount>
+	
+    <struggle>2</struggle>
+    <sapientPred>0</sapientPred>
+    <sapientPrey>2</sapientPrey>
+    <nuzzlePred>true</nuzzlePred>
+    <minOpinion>10</minOpinion>
+		
+    <logRulesInitiator>
+      <rulesStrings>
+        <li>r_logentry(2)->[INITIATOR_nameDef] [nuzzleadverb][nuzzled] [prey].</li>
+        <li>r_logentry->[INITIATOR_nameDef] [nuzzleadverb]licked over [prey].</li>
+        <li>r_logentry->[INITIATOR_nameDef] [nuzzleadverb]clenched [prey] deeper into [INITIATOR_objective].</li>
+        <li>r_logentry->[INITIATOR_nameDef] [nuzzleadverb]rubbed [INITIATOR_possessive] [snout] against [prey].</li>
+
+        <li>nuzzled(p=2)->nuzzled</li>
+        <li>nuzzled->snuggled up to</li>
++-9
+        <li>nuzzleadverb(p=4)-></li>
+        <li>nuzzleadverb->playfully </li>
+        <li>nuzzleadverb->gently </li>
+        <li>nuzzleadverb->encouragingly </li>
+        <li>nuzzleadverb->happily </li>
+        <li>nuzzleadverb->softly </li>
+        <li>nuzzleadverb->supportively </li>
+        <li>nuzzleadverb->lightly </li>
+        <li>nuzzleadverb->warmly </li>
+        <li>nuzzleadverb->plaintively </li>
+        <li>nuzzleadverb->lovingly </li>
+        <li>nuzzleadverb->affectionately </li>
+		
+        <li>snout(p=2)->nose</li>
+        <li>snout->snout</li>
+        <li>snout->head</li>
+        <li>snout->head</li>
+
+        <li>prey(p=2)->[RECIPIENT_nameDef]</li>
+        <li>prey->[INITIATOR_possessive] prey</li>
+        <li>prey->[INITIATOR_possessive] meal</li>
+        <li>prey->[INITIATOR_possessive] snack</li>
+      </rulesStrings>
+    </logRulesInitiator>
+  </RV2_Interactions.VoreSocialInteractionDef>
+  
+  <RV2_Interactions.VoreSocialInteractionDef ParentName="RV2I_Base">
+    <defName>RV2I_Nuzzle_Prey</defName>
+    <label>nuzzle</label>
+    <symbol>Motes/BellyNuzzle</symbol>
+    <interactionMote>Mote_Thought</interactionMote>
+    <initiatorThought>RV2I_Prey_AnimalNuzzle</initiatorThought>
+	
+    <initiatorXpGainSkill>Animals</initiatorXpGainSkill>
+    <initiatorXpGainAmount>4</initiatorXpGainAmount>
+	
+    <sapientPred>2</sapientPred>
+    <sapientPrey>0</sapientPrey>
+    <nuzzlePrey>true</nuzzlePrey>
+    <minOpinion>10</minOpinion>
+		
+    <logRulesInitiator>
+      <rulesStrings>
+        <li>r_logentry(p=2)->[RECIPIENT_nameDef][nuzzleadverb] [nuzzled] [INITIATOR_nameDef]'s [adjt][rubbedpart].</li>
+        <li>r_logentry->[INITIATOR_nameDef] [act] as [RECIPIENT_nameDef][nuzzleadverb] [nuzzled] [INITIATOR_possessive] [adjt][rubbedpart].</li>
+        <li>r_logentry->[RECIPIENT_nameDef][nuzzleadverb] [nuzzled] against [INITIATOR_nameDef]'s [adjt][rubbedpart].</li>
+        <li>r_logentry->[RECIPIENT_nameDef] [relax] into [INITIATOR_nameDef]'s body as [INITIATOR_pronoun][nuzzleadverb] [hold] [INITIATOR_objective].</li>
+
+
+        <li>act(p=2)->sighs</li>
+        <li>act->squirms a little</li>
+        <li>act->pets over [INITIATOR_possessive] prey</li>
+        <li>act->nearly trips</li>
+        <li>act->bites [INITIATOR_possessive] lip a little</li>
+        <li>act->instictualy clenches [INITIATOR_possessive] prey</li>
+		
+        <li>nuzzled(p=2)->nuzzled</li>
+        <li>nuzzled->snuggled up against</li>
+        <li>nuzzled->brushed against</li>
+        <li>nuzzled->leaned into</li>
+        <li>nuzzled->streches into</li>
+
+        <li>nuzzleadverb(p=4)-></li>
+        <li>nuzzleadverb-> gently</li>
+        <li>nuzzleadverb-> encouragingly</li>
+        <li>nuzzleadverb-> happily</li>
+        <li>nuzzleadverb-> softly</li>
+        <li>nuzzleadverb-> supportively</li>
+        <li>nuzzleadverb-> playfully</li>
+        <li>nuzzleadverb-> warmly</li>
+        <li>nuzzleadverb-> plaintively</li>
+        <li>nuzzleadverb-> lovingly</li>
+        <li>nuzzleadverb-> affectionately</li>
+
+        <li>adjt(p4)-></li>
+        <li>adjt->warm </li>
+        <li>adjt->comfortable </li>
+        <li>adjt->snug </li>
+		
+        <li>relax(p-3)->relaxes</li>
+        <li>relax->nuzzles softly</li>
+        <li>relax->goes limp</li>
+        <li>relax->rests</li>
+        <li>relax->curls up</li>
+		
+        <li>hold(p-3)->holds</li>
+        <li>hold->comforts</li>
+        <li>hold->pets</li>
+        <li>hold->cradles</li>
+        <li>hold->hugs</li>
+		
+        <li>rubbedpart->innards</li>
+        <li>rubbedpart->insides</li>
+        <li>rubbedpart->inner walls</li>
+      </rulesStrings>
+    </logRulesInitiator>
+  </RV2_Interactions.VoreSocialInteractionDef>
+</Defs>

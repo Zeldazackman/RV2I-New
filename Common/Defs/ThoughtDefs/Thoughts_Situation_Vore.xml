@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+  <ThoughtDef>
+    <defName>RV2I_Prey_AnimalNuzzle</defName>
+    <durationDays>1</durationDays>
+    <stackLimit>4</stackLimit>
+    <stackedEffectMultiplier>0.75</stackedEffectMultiplier>
+    <nullifyingTraits>
+      <li>Psychopath</li>
+    </nullifyingTraits>
+    <stages>
+      <li>
+        <label>nuzzled from inside</label>
+        <description>My prey nuzzled me.</description>
+        <baseMoodEffect>2</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>RV2I_Predator_AnimalNuzzle</defName>
+    <durationDays>1</durationDays>
+    <stackLimit>5</stackLimit>
+    <stackedEffectMultiplier>1</stackedEffectMultiplier>
+    <nullifyingTraits>
+      <li>Psychopath</li>
+    </nullifyingTraits>
+    <stages>
+      <li>
+        <label>nuzzled by predator</label>
+        <description>My predator kept nuzzling me.</description>
+        <baseMoodEffect>2</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>RV2I_Squirm_Pred</defName>
+    <durationDays>2</durationDays>
+    <stackLimit>2</stackLimit>
+    <stackedEffectMultiplier>1</stackedEffectMultiplier>
+    <stages>
+      <li>
+        <label>squirming prey</label>
+        <description>Always feels nice to have a squirmer.</description>
+        <baseMoodEffect>2</baseMoodEffect>
+        <baseOpinionOffset>2</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+  <ThoughtDef>
+    <defName>RV2I_Squirm_Prey</defName>
+    <durationDays>4</durationDays>
+    <stackLimit>3</stackLimit>
+    <stackedEffectMultiplier>1</stackedEffectMultiplier>
+    <stages>
+      <li>
+        <label>squirmer</label>
+        <description>Always feels nice to mess with a pred.</description>
+        <baseMoodEffect>2</baseMoodEffect>
+        <baseOpinionOffset>2</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>RV2I_Comfort</defName>
+    <durationDays>5</durationDays>
+    <stackLimit>5</stackLimit>
+    <stackedEffectMultiplier>0.75</stackedEffectMultiplier>
+    <nullifyingTraits>
+      <li>Psychopath</li>
+    </nullifyingTraits>
+    <stages>
+      <li>
+        <label>comforted</label>
+        <description>Nice preds are the best.</description>
+        <baseMoodEffect>4</baseMoodEffect>
+        <baseOpinionOffset>4</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+</Defs>
