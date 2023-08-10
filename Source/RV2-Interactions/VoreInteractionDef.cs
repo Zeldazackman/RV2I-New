@@ -45,11 +45,13 @@ namespace RV2_Interactions
             if (interaction.endo == Convert.ToInt32(record.VoreGoal.IsLethal))
                 return false;
 
-            if (interaction.minOpinion > GetAdjOpinion(record.Prey, record.Predator)
-             || interaction.minOpinion > GetAdjOpinion(record.Predator, record.Prey))
+            if (interaction.minOpinion > -100
+             && (interaction.minOpinion > GetAdjOpinion(record.Prey, record.Predator)
+              || interaction.minOpinion > GetAdjOpinion(record.Predator, record.Prey)))
                 return false;
-            if (interaction.maxOpinion < GetAdjOpinion(record.Prey, record.Predator)
-             || interaction.maxOpinion < GetAdjOpinion(record.Predator, record.Prey))
+            if (interaction.maxOpinion < 100
+             && (interaction.maxOpinion < GetAdjOpinion(record.Prey, record.Predator)
+              || interaction.maxOpinion < GetAdjOpinion(record.Predator, record.Prey)))
                 return false;
 
             if (interaction.sapientPred < 2
@@ -95,6 +97,7 @@ namespace RV2_Interactions
 
             bool goodGoal = true;
             bool goodType = true;
+
             if (interaction.validGoals != null)
                 foreach (VoreGoalDef voreGoal in interaction.validGoals)
                     if (record.VoreGoal == voreGoal)
@@ -120,45 +123,53 @@ namespace RV2_Interactions
 
         private int GetAdjOpinion(Pawn pawnA, Pawn pawnB)
         {
+            int mod = 0;
+            if (pawnA.IsHumanoid() || pawnB.IsHumanoid())
+            {
+                if (pawnA.IsHumanoid() && pawnA.story.traits.HasTrait(TraitDefOf.Kind))
+                    mod = 10;
+                if (pawnB.IsHumanoid() && pawnB.story.traits.HasTrait(TraitDefOf.Kind))
+                    mod += 10;
+            }
             if (pawnA.IsHumanoid() && pawnB.IsHumanoid())
-                return pawnA.relations.OpinionOf(pawnB);
+                return pawnA.relations.OpinionOf(pawnB) + mod;
 
             if ((!pawnA.IsHumanoid() || !pawnB.IsHumanoid()) && !(!pawnA.IsHumanoid() && !pawnB.IsHumanoid()))
             {
                 if (pawnA.IsHumanoid())
                 {
                     if (pawnB.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Bond) == pawnA)
-                        return 60;
+                        return 60 + mod;
 
                     if (pawnB.Faction == pawnA.Faction)
-                        return 10 + pawnA.skills.GetSkill(SkillDefOf.Animals).levelInt;
+                        return 10 + pawnA.skills.GetSkill(SkillDefOf.Animals).levelInt + mod;
 
                     if (!pawnB.HostileTo(pawnA))
                         return pawnA.skills.GetSkill(SkillDefOf.Animals).levelInt;
 
-                    return 0;
+                    return 0 + mod;
                 }
                 if (pawnB.IsHumanoid())
                 {
                     if (pawnA.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Bond) == pawnB)
-                        return 60;
+                        return 60 + mod;
 
                     if (pawnA.Faction == pawnB.Faction)
-                        return 10 + pawnB.skills.GetSkill(SkillDefOf.Animals).levelInt;
+                        return 10 + pawnB.skills.GetSkill(SkillDefOf.Animals).levelInt + mod;
 
                     if (!pawnA.HostileTo(pawnB))
                         return pawnB.skills.GetSkill(SkillDefOf.Animals).levelInt;
 
-                    return 0;
+                    return 0 + mod;
                 }
             }
             if (pawnA.relations.FamilyByBlood.Contains(pawnB))
-                return 30;
+                return 30 + mod;
 
             if (pawnA.Faction == pawnB.Faction)
-                return 10;
+                return 10 + mod;
 
-            return 0;
+            return 0 + mod;
         }
         public override IEnumerable<string> ConfigErrors()
         {

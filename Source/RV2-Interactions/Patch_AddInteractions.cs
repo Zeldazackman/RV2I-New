@@ -12,42 +12,45 @@ namespace RV2_Interactions
         [HarmonyPostfix]
         static void DoInteractions(VoreTrackerRecord __instance)
         {
-            float modifier = (float)__instance.VoreTracker.VoreTrackerRecords.Count;
-            if (__instance.Predator.HostileTo(__instance.Prey))
-                modifier *= 2f;
-
-            if (Rand.Chance(0.125f / modifier)
-             && (!__instance.HasReachedEnd && !__instance.HasReachedEntrance)
-             && (__instance.Predator.health.capacities.CanBeAwake && __instance.Prey.health.capacities.CanBeAwake)
-             && (!__instance.Predator.health.InPainShock && !__instance.Prey.health.InPainShock)
-             && (InteractionUtility.CanInitiateInteraction(__instance.Predator, null) && __instance.Predator.jobs.curDriver.DesiredSocialMode() != RandomSocialMode.Off)
-             && !__instance.Predator.interactions.InteractedTooRecentlyToInteract())
+            if (__instance.Predator.Map != null && __instance.Predator.Spawned)
             {
-                //Log.Message("Attempting Interaction");
-                List<VoreSocialInteractionDef> validInteractions = new List<VoreSocialInteractionDef>();
-                float totalWeight = 0f;
-                List<VoreSocialInteractionDef> loadedInteractions = DefDatabase<VoreSocialInteractionDef>.AllDefsListForReading;
+                float modifier = (float)__instance.VoreTracker.VoreTrackerRecords.Count;
+                if (__instance.Predator.HostileTo(__instance.Prey))
+                    modifier *= 2f;
 
-                //Log.Message(loadedInteractions.Count + " interactions loaded");
-                foreach (VoreSocialInteractionDef interaction in loadedInteractions)
-                    if (interaction.ValidInteraction(__instance) && interaction.weight > 0f)
-                    {
-                        validInteractions.Add(interaction);
-                        totalWeight += interaction.weight;
-                    }
-
-                //Log.Message(validInteractions.Count + " interactions valid");
-                if (!validInteractions.NullOrEmpty())
+                if (Rand.Chance(0.125f / modifier)
+                 && (!__instance.HasReachedEnd && !__instance.HasReachedEntrance)
+                 && (__instance.Predator.health.capacities.CanBeAwake && __instance.Prey.health.capacities.CanBeAwake)
+                 && (!__instance.Predator.health.InPainShock && !__instance.Prey.health.InPainShock)
+                 && (InteractionUtility.CanInitiateInteraction(__instance.Predator, null) && __instance.Predator.jobs.curDriver.DesiredSocialMode() != RandomSocialMode.Off)
+                 && !__instance.Predator.interactions.InteractedTooRecentlyToInteract())
                 {
-                    foreach (VoreSocialInteractionDef interactionDef in validInteractions)
-                    {
-                        if (Rand.Range(0f, totalWeight - interactionDef.weight) < interactionDef.weight)
+                    //Log.Message("Attempting Interaction");
+                    List<VoreSocialInteractionDef> validInteractions = new List<VoreSocialInteractionDef>();
+                    float totalWeight = 0f;
+                    List<VoreSocialInteractionDef> loadedInteractions = DefDatabase<VoreSocialInteractionDef>.AllDefsListForReading;
+
+                    //Log.Message(loadedInteractions.Count + " interactions loaded");
+                    foreach (VoreSocialInteractionDef interaction in loadedInteractions)
+                        if (interaction.ValidInteraction(__instance) && interaction.weight > 0f)
                         {
-                            //Log.Message(interactionDef.defName + " chosen");
-                            DoFakeInteraction(__instance.Prey, interactionDef, __instance);
-                            break;
+                            validInteractions.Add(interaction);
+                            totalWeight += interaction.weight;
                         }
-                        totalWeight -= interactionDef.weight;
+
+                    //Log.Message(validInteractions.Count + " interactions valid");
+                    if (!validInteractions.NullOrEmpty())
+                    {
+                        foreach (VoreSocialInteractionDef interactionDef in validInteractions)
+                        {
+                            if (Rand.Range(0f, totalWeight - interactionDef.weight) < interactionDef.weight)
+                            {
+                                //Log.Message(interactionDef.defName + " chosen");
+                                DoFakeInteraction(__instance.Prey, interactionDef, __instance);
+                                break;
+                            }
+                            totalWeight -= interactionDef.weight;
+                        }
                     }
                 }
             }
