@@ -454,7 +454,7 @@
 		
     <logRulesInitiator>
       <rulesStrings>
-        <li>r_logentry(2)->[INITIATOR_nameDef] [nuzzleadverb][nuzzled] [prey].</li>
+        <li>r_logentry(p=2)->[INITIATOR_nameDef] [nuzzleadverb][nuzzled] [prey].</li>
         <li>r_logentry->[INITIATOR_nameDef] [nuzzleadverb]licked over [prey].</li>
         <li>r_logentry->[INITIATOR_nameDef] [nuzzleadverb]clenched [prey] deeper into [INITIATOR_objective].</li>
         <li>r_logentry->[INITIATOR_nameDef] [nuzzleadverb]rubbed [INITIATOR_possessive] [snout] against [prey].</li>
@@ -535,18 +535,18 @@
         <li>nuzzleadverb-> lovingly</li>
         <li>nuzzleadverb-> affectionately</li>
 
-        <li>adjt(p4)-></li>
+        <li>adjt(p=4)-></li>
         <li>adjt->warm </li>
         <li>adjt->comfortable </li>
         <li>adjt->snug </li>
 		
-        <li>relax(p-3)->relaxes</li>
+        <li>relax(p=3)->relaxes</li>
         <li>relax->nuzzles softly</li>
         <li>relax->goes limp</li>
         <li>relax->rests</li>
         <li>relax->curls up</li>
 		
-        <li>hold(p-3)->holds</li>
+        <li>hold(p=3)->holds</li>
         <li>hold->comforts</li>
         <li>hold->pets</li>
         <li>hold->cradles</li>
