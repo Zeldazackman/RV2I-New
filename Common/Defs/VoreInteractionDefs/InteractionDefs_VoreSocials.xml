@@ -122,7 +122,7 @@
     <recipientXpGainSkill>Social</recipientXpGainSkill>
     <recipientXpGainAmount>4</recipientXpGainAmount>
 	
-    <weight>0.25</weight>
+    <weight>0.5</weight>
 	
     <minOpinion>25</minOpinion>
 	
@@ -160,7 +160,7 @@
     <initiatorXpGainSkill>Social</initiatorXpGainSkill>
     <initiatorXpGainAmount>4</initiatorXpGainAmount>
 	
-    <weight>0.5</weight>
+    <weight>1.0</weight>
 	
     <struggle>2</struggle>
     <hostile>2</hostile>
@@ -203,7 +203,7 @@
     <recipientXpGainSkill>Social</recipientXpGainSkill>
     <recipientXpGainAmount>4</recipientXpGainAmount>
 	
-    <weight>0.5</weight>
+    <weight>1.0</weight>
 	
     <struggle>2</struggle>
     <hostile>2</hostile>
@@ -246,7 +246,7 @@
     <initiatorXpGainSkill>Social</initiatorXpGainSkill>
     <initiatorXpGainAmount>4</initiatorXpGainAmount>
 	
-    <weight>0.35</weight>
+    <weight>1.0</weight>
 	
     <struggle>2</struggle>
     <hostile>2</hostile>
@@ -292,7 +292,7 @@
     <recipientXpGainSkill>Social</recipientXpGainSkill>
     <recipientXpGainAmount>4</recipientXpGainAmount>
 	
-    <weight>0.35</weight>
+    <weight>1.0</weight>
 	
     <struggle>2</struggle>
     <hostile>2</hostile>
@@ -392,10 +392,13 @@
     <recipientXpGainSkill>Melee</recipientXpGainSkill>
     <recipientXpGainAmount>4</recipientXpGainAmount>
 	
-    <weight>2.0</weight>
+    <weight>3.0</weight>
 	
     <willing>1</willing>
     <minOpinion>25</minOpinion>
+	
+    <sapientPred>2</sapientPred>
+    <sapientPrey>2</sapientPrey>
 		
     <logRulesInitiator>
       <rulesStrings>
