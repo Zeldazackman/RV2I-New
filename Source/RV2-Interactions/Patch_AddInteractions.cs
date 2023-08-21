@@ -18,6 +18,10 @@ namespace RV2_Interactions
                 if (__instance.Predator.HostileTo(__instance.Prey))
                     modifier *= 2f;
 
+                modifier *= 1f + ((float)__instance.Predator.relations.OpinionOf(__instance.Prey) / 100f);
+                if (__instance.Predator.relations.OpinionOf(__instance.Prey) < 0)
+                    modifier /= (float)__instance.Predator.relations.OpinionOf(__instance.Prey) / -100f;
+
                 if (Rand.Chance(0.125f / modifier)
                  && (!__instance.HasReachedEnd && !__instance.HasReachedEntrance)
                  && (__instance.Predator.health.capacities.CanBeAwake && __instance.Prey.health.capacities.CanBeAwake)
