@@ -124,7 +124,7 @@
 	
     <weight>0.5</weight>
 	
-    <minOpinion>25</minOpinion>
+    <minOpinion>10</minOpinion>
 	
     <label>deep talk</label>
     <workerClass>InteractionWorker_DeepTalk</workerClass>
@@ -254,7 +254,7 @@
     <endo>2</endo>
 	
     <minOpinion>-100</minOpinion>
-    <maxOpinion>-15</maxOpinion>
+    <maxOpinion>0</maxOpinion>
 	
     <label>insult</label>
     <workerClass>InteractionWorker_Insult</workerClass>
@@ -300,7 +300,7 @@
     <endo>2</endo>
 	
     <minOpinion>-100</minOpinion>
-    <maxOpinion>-15</maxOpinion>
+    <maxOpinion>0</maxOpinion>
 	
     <label>insult</label>
     <workerClass>InteractionWorker_Insult</workerClass>
