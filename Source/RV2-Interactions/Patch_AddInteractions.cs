@@ -22,12 +22,26 @@ namespace RV2_Interactions
                 if (__instance.Predator.relations.OpinionOf(__instance.Prey) < 0)
                     modifier /= (float)__instance.Predator.relations.OpinionOf(__instance.Prey) / -100f;
 
-                if (Rand.Chance(0.125f / modifier)
+
+#if v1_3
+                bool doInteract =
+                 Rand.Chance(0.125f / modifier)
                  && (!__instance.HasReachedEnd && !__instance.HasReachedEntrance)
                  && (__instance.Predator.health.capacities.CanBeAwake && __instance.Prey.health.capacities.CanBeAwake)
                  && (!__instance.Predator.health.InPainShock && !__instance.Prey.health.InPainShock)
                  && (InteractionUtility.CanInitiateInteraction(__instance.Predator, null) && __instance.Predator.jobs.curDriver.DesiredSocialMode() != RandomSocialMode.Off)
-                 && !__instance.Predator.interactions.InteractedTooRecentlyToInteract())
+                 && !__instance.Predator.interactions.InteractedTooRecentlyToInteract();
+#else
+                bool doInteract =
+                 (__instance.Predator.genes.xenotypeName != "basic android" || __instance.Predator.genes.xenotypeName != "awakened android" || __instance.Prey.genes.xenotypeName != "basic android" || __instance.Prey.genes.xenotypeName != "awakened android")
+                 && Rand.Chance(0.125f / modifier)
+                 && (!__instance.HasReachedEnd && !__instance.HasReachedEntrance)
+                 && (__instance.Predator.health.capacities.CanBeAwake && __instance.Prey.health.capacities.CanBeAwake)
+                 && (!__instance.Predator.health.InPainShock && !__instance.Prey.health.InPainShock)
+                 && (InteractionUtility.CanInitiateInteraction(__instance.Predator, null) && __instance.Predator.jobs.curDriver.DesiredSocialMode() != RandomSocialMode.Off)
+                 && !__instance.Predator.interactions.InteractedTooRecentlyToInteract();
+#endif
+                if (doInteract)
                 {
                     //Log.Message("Attempting Interaction");
                     List<VoreSocialInteractionDef> validInteractions = new List<VoreSocialInteractionDef>();

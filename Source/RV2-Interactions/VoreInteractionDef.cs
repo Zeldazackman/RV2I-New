@@ -65,7 +65,7 @@ namespace RV2_Interactions
 
             if (interaction.compatOnly && record.Predator.relations.SecondaryRomanceChanceFactor(record.Prey) < 0.45f)
                 return false;
-            if (interaction.loversOnly != record.Predator.GetLoveCluster().Contains(record.Prey))
+            if (interaction.loversOnly && !record.Predator.GetLoveCluster().Contains(record.Prey))
                 return false;
 
             if (interaction.nuzzlePred)
@@ -124,6 +124,7 @@ namespace RV2_Interactions
         private int GetAdjOpinion(Pawn pawnA, Pawn pawnB)
         {
             int mod = 0;
+
             if (pawnA.IsHumanoid() || pawnB.IsHumanoid())
             {
                 if (pawnA.IsHumanoid() && pawnA.story.traits.HasTrait(TraitDefOf.Kind))
@@ -132,7 +133,7 @@ namespace RV2_Interactions
                     mod += 10;
             }
             if (pawnA.IsHumanoid() && pawnB.IsHumanoid())
-                return pawnA.relations.OpinionOf(pawnB) + mod;
+                return pawnA.relations.OpinionOf(pawnB) + mod > 100 ? 100 : pawnA.relations.OpinionOf(pawnB) + mod;
 
             if ((!pawnA.IsHumanoid() || !pawnB.IsHumanoid()) && !(!pawnA.IsHumanoid() && !pawnB.IsHumanoid()))
             {
