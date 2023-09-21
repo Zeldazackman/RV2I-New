@@ -33,7 +33,7 @@ namespace RV2_Interactions
                  && !__instance.Predator.interactions.InteractedTooRecentlyToInteract();
 #else
                 bool doInteract =
-                 (__instance.Predator.genes.xenotypeName != "basic android" || __instance.Predator.genes.xenotypeName != "awakened android" || __instance.Prey.genes.xenotypeName != "basic android" || __instance.Prey.genes.xenotypeName != "awakened android")
+                 (__instance.Predator.genes?.xenotypeName != "basic android" || __instance.Predator.genes?.xenotypeName != "awakened android" || __instance.Prey.genes?.xenotypeName != "basic android" || __instance.Prey.genes?.xenotypeName != "awakened android")
                  && Rand.Chance(0.125f / modifier)
                  && (!__instance.HasReachedEnd && !__instance.HasReachedEntrance)
                  && (__instance.Predator.health.capacities.CanBeAwake && __instance.Prey.health.capacities.CanBeAwake)
