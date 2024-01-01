@@ -115,13 +115,7 @@
   
   <RV2_Interactions.VoreSocialInteractionDef ParentName="RV2I_Base">
     <defName>RV2I_DeepTalk</defName>
-	
-    <initiatorXpGainSkill>Social</initiatorXpGainSkill>
-    <initiatorXpGainAmount>4</initiatorXpGainAmount>
-	
-    <recipientXpGainSkill>Social</recipientXpGainSkill>
-    <recipientXpGainAmount>4</recipientXpGainAmount>
-	
+	  
     <weight>0.5</weight>
 	
     <minOpinion>10</minOpinion>
@@ -129,8 +123,11 @@
     <label>deep talk</label>
     <workerClass>InteractionWorker_DeepTalk</workerClass>
     <symbol>Things/Mote/SpeechSymbols/DeepTalk</symbol>
+    <initiatorXpGainSkill>Social</initiatorXpGainSkill>
     <initiatorXpGainAmount>10</initiatorXpGainAmount>
     <initiatorThought>DeepTalk</initiatorThought>
+    <recipientXpGainSkill>Social</recipientXpGainSkill>
+    <recipientXpGainAmount>10</recipientXpGainAmount>
     <recipientThought>DeepTalk</recipientThought>
 	
     <logRulesInitiator>
