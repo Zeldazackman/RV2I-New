@@ -1,4 +1,4 @@
-﻿using RimVore2;
+using RimVore2;
 using System;
 using UnityEngine;
 using Verse;
@@ -12,12 +12,14 @@ namespace RV2_Interactions
         private FloatSmartSetting opinionModifier;
         private FloatSmartSetting multiPreyModifier;
 
+        private FloatSmartSetting baseOpinionMod;
         private FloatSmartSetting skillOpinionMod;
         private FloatSmartSetting kindOpinionMod;
 
         public float InteractionChance => this.interactionChance.value / 100f;
         public float OpinionModifier => this.opinionModifier.value / 100f;
         public float MultiPreyModifier => this.multiPreyModifier.value / 100f;
+        public int BaseOpinionMod => (int)Math.Floor(this.baseOpinionMod.value);
         public int SkillOpinionMod => (int)Math.Floor(this.skillOpinionMod.value);
         public int KindOpinionMod => (int)Math.Floor(this.kindOpinionMod.value);
 
@@ -29,6 +31,8 @@ namespace RV2_Interactions
                 this.opinionModifier = new FloatSmartSetting("RV2Interaction_Settings_OpinionModifier", 50f, 50f, 0f, 100f, "RV2Interaction_Settings_OpinionModifierTip", "0", "%");
             if (this.multiPreyModifier == null || this.multiPreyModifier.IsInvalid())
                 this.multiPreyModifier = new FloatSmartSetting("RV2Interaction_Settings_MultiPreyModifier", 100f, 100f, 0f, 100f, "RV2Interaction_Settings_MultiPreyModifier_Tip", "0", "%");
+            if (this.baseOpinionMod == null || this.baseOpinionMod.IsInvalid())
+                this.baseOpinionMod = new FloatSmartSetting("RV2Interaction_Settings_BaseOpinionMod", 0f, 0f, -50f, 50f, "RV2Interaction_Settings_BaseOpinionMod_Tip", "0");
             if (this.kindOpinionMod == null || this.kindOpinionMod.IsInvalid())
                 this.kindOpinionMod = new FloatSmartSetting("RV2Interaction_Settings_KindOpinionMod", 10f, 10f, 0f, 50f, "RV2Interaction_Settings_KindOpinionMod_Tip", "0");
             if (this.skillOpinionMod == null || this.skillOpinionMod.IsInvalid())
@@ -47,6 +51,7 @@ namespace RV2_Interactions
             this.interactionChance = null;
             this.opinionModifier = null;
             this.multiPreyModifier = null;
+            this.baseOpinionMod = null;
             this.skillOpinionMod = null;
             this.kindOpinionMod = null;
 
@@ -58,9 +63,12 @@ namespace RV2_Interactions
             if (listing_Standard.ButtonText("RV2_Settings_Reset".Translate(), null))
                 this.Reset();
 
+            listing_Standard.Gap(12f);
             this.interactionChance.DoSetting(listing_Standard);
             this.multiPreyModifier.DoSetting(listing_Standard);
             this.opinionModifier.DoSetting(listing_Standard);
+            listing_Standard.Gap(12f);
+            this.baseOpinionMod.DoSetting(listing_Standard);
             this.skillOpinionMod.DoSetting(listing_Standard);
             this.kindOpinionMod.DoSetting(listing_Standard);
             listing_Standard.EndScrollView(ref this.height, ref this.heightStale);
@@ -73,6 +81,7 @@ namespace RV2_Interactions
             Scribe_Deep.Look<FloatSmartSetting>(ref this.interactionChance, "interactionChance", new object[0]);
             Scribe_Deep.Look<FloatSmartSetting>(ref this.opinionModifier, "opinionModifier", new object[0]);
             Scribe_Deep.Look<FloatSmartSetting>(ref this.multiPreyModifier, "multiPreyModifier", new object[0]);
+            Scribe_Deep.Look<FloatSmartSetting>(ref this.baseOpinionMod, "baseOpinionMod", new object[0]);
             Scribe_Deep.Look<FloatSmartSetting>(ref this.kindOpinionMod, "kindOpinionMod", new object[0]);
             Scribe_Deep.Look<FloatSmartSetting>(ref this.skillOpinionMod, "skillOpinionMod", new object[0]);
             this.PostExposeData();
