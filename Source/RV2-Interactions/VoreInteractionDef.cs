@@ -121,10 +121,17 @@ namespace RV2_Interactions
             return goodGoal && goodType;
         }
 
+        private int Clamped(int n, int min, int max)
+        {
+            if (n < min) return min;
+            if (n > max) return max;
+            return n;
+        }
+
         private int GetAdjOpinion(Pawn pawnA, Pawn pawnB)
         {
-            int mod = 0;
             SettingsContainer_Interactions settings = Patch_RV2Interaction_Settings.RV2Interaction_Settings.interactions;
+            int mod = settings.BaseOpinionMod;
             if (pawnA.IsHumanoid() || pawnB.IsHumanoid())
             {
                 if (pawnA.IsHumanoid() && pawnA.story.traits.HasTrait(TraitDefOf.Kind))
@@ -137,7 +144,7 @@ namespace RV2_Interactions
             {
                 int skillmod = Math.Min(20, Math.Max(pawnA.skills.GetSkill(SkillDefOf.Social).levelInt, pawnB.skills.GetSkill(SkillDefOf.Social).levelInt));
                 mod += settings.SkillOpinionMod * (skillmod/20);
-                return pawnA.relations.OpinionOf(pawnB) + mod;
+                return Clamped(pawnA.relations.OpinionOf(pawnB) + mod, -100, 100);
             }
 
             if ((!pawnA.IsHumanoid() || !pawnB.IsHumanoid()) && !(!pawnA.IsHumanoid() && !pawnB.IsHumanoid()))
@@ -145,37 +152,37 @@ namespace RV2_Interactions
                 if (pawnA.IsHumanoid())
                 {
                     if (pawnB.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Bond) == pawnA)
-                        return 50 + mod;
+                        return Clamped(50 + mod, -100, 100);
 
                     if (pawnB.Faction == pawnA.Faction)
-                        return settings.SkillOpinionMod * (Math.Min(pawnA.skills.GetSkill(SkillDefOf.Animals).levelInt, 20)/20) + mod;
+                        return Clamped(settings.SkillOpinionMod * (Math.Min(pawnA.skills.GetSkill(SkillDefOf.Animals).levelInt, 20)/20) + mod, -100, 100);
 
                     if (!pawnB.HostileTo(pawnA))
-                        return settings.SkillOpinionMod * (Math.Min(pawnA.skills.GetSkill(SkillDefOf.Animals).levelInt, 20) / 20);
+                        return Clamped(settings.SkillOpinionMod * (Math.Min(pawnA.skills.GetSkill(SkillDefOf.Animals).levelInt, 20) / 20), -100, 100);
 
-                    return 0 + mod;
+                    return mod;
                 }
                 if (pawnB.IsHumanoid())
                 {
                     if (pawnA.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Bond) == pawnB)
-                        return 50 + mod;
+                        return Clamped(50 + mod, -100, 100);
 
                     if (pawnA.Faction == pawnB.Faction)
-                        return settings.SkillOpinionMod * (Math.Min(pawnB.skills.GetSkill(SkillDefOf.Animals).levelInt, 20) / 20) + mod;
+                        return Clamped(settings.SkillOpinionMod * (Math.Min(pawnB.skills.GetSkill(SkillDefOf.Animals).levelInt, 20) / 20) + mod, -100, 100);
 
                     if (!pawnA.HostileTo(pawnB))
-                        return settings.SkillOpinionMod * (Math.Min(pawnB.skills.GetSkill(SkillDefOf.Animals).levelInt, 20) / 20);
+                        return Clamped(settings.SkillOpinionMod * (Math.Min(pawnB.skills.GetSkill(SkillDefOf.Animals).levelInt, 20) / 20), -100, 100);
 
-                    return 0 + mod;
+                    return Clamped(0 + mod, -100, 100);
                 }
             }
             if (pawnA.relations.FamilyByBlood.Contains(pawnB))
-                return 30 + mod;
+                return Clamped(30 + mod, -100, 100);
 
             if (pawnA.Faction == pawnB.Faction)
-                return 10 + mod;
+                return Clamped(10 + mod, -100, 100);
 
-            return 0 + mod;
+            return mod;
         }
         public override IEnumerable<string> ConfigErrors()
         {
