@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>  
+
+  <RV2Interaction_Settings_InteractionChance>Interaction chance</RV2Interaction_Settings_InteractionChance>  
+  <RV2Interaction_Settings_InteractionChanceTip>How likely predator and prey will interact with each other, each vore-tick.</RV2Interaction_Settings_InteractionChanceTip>
+  <RV2Interaction_Settings_MultiPreyModifier>Multi-prey modifier</RV2Interaction_Settings_MultiPreyModifier>  
+  <RV2Interaction_Settings_MultiPreyModifier_Tip>How much the odds for an interaction lower if the pred has multiple prey. At 100% .</RV2Interaction_Settings_MultiPreyModifier_Tip>
+  <RV2Interaction_Settings_OpinionModifier>Opinion modifier</RV2Interaction_Settings_OpinionModifier>  
+  <RV2Interaction_Settings_MultiPreyModifier_Tip>How much the pred and prey's opinion of each other affect interaction odds. 100% doubles odds at 100 opinion, and halves at -100.</RV2Interaction_Settings_MultiPreyModifier_Tip>
+  <RV2Interaction_Settings_KindOpinionMod>Kind modifier</RV2Interaction_Settings_KindOpinionMod>  
+  <RV2Interaction_Settings_KindOpinionMod_Tip>How much opinion to add if either the pred or prey have the Kind trait.</RV2Interaction_Settings_KindOpinionMod_Tip>
+  <RV2Interaction_Settings_KindOpinionMod>Skill modifier</RV2Interaction_Settings_KindOpinionMod>  
+  <RV2Interaction_Settings_KindOpinionMod_Tip>How much opinion to add for the pred or prey's skills in Social or Animals. Maxes out to this value at level 20.</RV2Interaction_Settings_KindOpinionMod_Tip>
+  
+</LanguageData>
