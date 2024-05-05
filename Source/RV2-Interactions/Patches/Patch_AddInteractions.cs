@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using RimVore2;
 using RimWorld;
 using System.Collections.Generic;
@@ -14,34 +14,17 @@ namespace RV2_Interactions
         {
             if (__instance.Predator.Map != null && __instance.Predator.Spawned)
             {
-                float modifier = (float)__instance.VoreTracker.VoreTrackerRecords.Count;
+                SettingsContainer_Interactions settings = Patch_RV2Interaction_Settings.RV2Interaction_Settings.interactions;
+                float modifier = 1f + settings.MultiPreyModifier * (__instance.VoreTracker.VoreTrackerRecords.Count - 1);
                 if (__instance.Predator.HostileTo(__instance.Prey))
                     modifier *= 2f;
 
-                modifier *= 1f + ((float)__instance.Predator.relations.OpinionOf(__instance.Prey) / 100f);
-                if (__instance.Predator.relations.OpinionOf(__instance.Prey) < 0)
-                    modifier /= (float)__instance.Predator.relations.OpinionOf(__instance.Prey) / -100f;
-
-
-#if v1_3
-                bool doInteract =
-                 Rand.Chance(0.125f / modifier)
+                if (Rand.Chance(settings.InteractionChance / modifier)
                  && (!__instance.HasReachedEnd && !__instance.HasReachedEntrance)
                  && (__instance.Predator.health.capacities.CanBeAwake && __instance.Prey.health.capacities.CanBeAwake)
                  && (!__instance.Predator.health.InPainShock && !__instance.Prey.health.InPainShock)
                  && (InteractionUtility.CanInitiateInteraction(__instance.Predator, null) && __instance.Predator.jobs.curDriver.DesiredSocialMode() != RandomSocialMode.Off)
-                 && !__instance.Predator.interactions.InteractedTooRecentlyToInteract();
-#else
-                bool doInteract =
-                 (__instance.Predator.genes?.xenotypeName != "basic android" || __instance.Predator.genes?.xenotypeName != "awakened android" || __instance.Prey.genes?.xenotypeName != "basic android" || __instance.Prey.genes?.xenotypeName != "awakened android")
-                 && Rand.Chance(0.125f / modifier)
-                 && (!__instance.HasReachedEnd && !__instance.HasReachedEntrance)
-                 && (__instance.Predator.health.capacities.CanBeAwake && __instance.Prey.health.capacities.CanBeAwake)
-                 && (!__instance.Predator.health.InPainShock && !__instance.Prey.health.InPainShock)
-                 && (InteractionUtility.CanInitiateInteraction(__instance.Predator, null) && __instance.Predator.jobs.curDriver.DesiredSocialMode() != RandomSocialMode.Off)
-                 && !__instance.Predator.interactions.InteractedTooRecentlyToInteract();
-#endif
-                if (doInteract)
+                 && !__instance.Predator.interactions.InteractedTooRecentlyToInteract())
                 {
                     //Log.Message("Attempting Interaction");
                     List<VoreSocialInteractionDef> validInteractions = new List<VoreSocialInteractionDef>();
@@ -96,11 +79,11 @@ namespace RV2_Interactions
                 }
                 if (intDef.initiatorXpGainSkill != null && predator.RaceProps.Humanlike)
                 {
-                    predator.skills.Learn(intDef.initiatorXpGainSkill, (float)intDef.initiatorXpGainAmount, false);
+                    predator.skills.Learn(intDef.initiatorXpGainSkill, intDef.initiatorXpGainAmount, false);
                 }
                 if (intDef.recipientXpGainSkill != null && recipient.RaceProps.Humanlike)
                 {
-                    recipient.skills.Learn(intDef.recipientXpGainSkill, (float)intDef.recipientXpGainAmount, false);
+                    recipient.skills.Learn(intDef.recipientXpGainSkill, intDef.recipientXpGainAmount, false);
                 }
                 intDef.Worker.Interacted(predator, recipient, list, out string text, out string text2, out LetterDef letterDef, out LookTargets lookTargets);
                 MoteMaker.MakeInteractionBubble(predator, predator, intDef.interactionMote, intDef.GetSymbol(predator.Faction, predator.Ideo), intDef.GetSymbolColor(predator.Faction));
