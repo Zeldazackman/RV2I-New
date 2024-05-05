@@ -1,6 +1,0 @@
-F:\Steam\steamapps\common\RimWorld\RimVore2-Interactions\Source\RV2-Interactions\bin\Debug\RV2-Interactions.dll
-F:\Steam\steamapps\common\RimWorld\RimVore2-Interactions\Source\RV2-Interactions\bin\Debug\RV2-Interactions.pdb
-F:\Steam\steamapps\common\RimWorld\RimVore2-Interactions\Source\RV2-Interactions\obj\Debug\RV2-Interactions.csproj.AssemblyReference.cache
-F:\Steam\steamapps\common\RimWorld\RimVore2-Interactions\Source\RV2-Interactions\obj\Debug\RV2-Interactions.csproj.CoreCompileInputs.cache
-F:\Steam\steamapps\common\RimWorld\RimVore2-Interactions\Source\RV2-Interactions\obj\Debug\RV2-Interactions.dll
-F:\Steam\steamapps\common\RimWorld\RimVore2-Interactions\Source\RV2-Interactions\obj\Debug\RV2-Interactions.pdb
