@@ -1,4 +1,4 @@
-﻿using RimVore2;
+using RimVore2;
 using RimWorld;
 using System;
 using System.Collections.Generic;
@@ -32,7 +32,7 @@ namespace RV2_Interactions
 
         public bool ValidInteraction(VoreTrackerRecord record)
         {
-            VoreSocialInteractionDef interaction = (this as VoreSocialInteractionDef);
+            VoreSocialInteractionDef interaction = this;
             if (interaction.willing == Convert.ToInt32(record.IsForced))
                 return false;
 
@@ -65,7 +65,7 @@ namespace RV2_Interactions
 
             if (interaction.compatOnly && record.Predator.relations.SecondaryRomanceChanceFactor(record.Prey) < 0.45f)
                 return false;
-            if (interaction.loversOnly && !record.Predator.GetLoveCluster().Contains(record.Prey))
+            if (interaction.loversOnly != record.Predator.GetLoveCluster().Contains(record.Prey))
                 return false;
 
             if (interaction.nuzzlePred)
@@ -124,42 +124,47 @@ namespace RV2_Interactions
         private int GetAdjOpinion(Pawn pawnA, Pawn pawnB)
         {
             int mod = 0;
-
+            SettingsContainer_Interactions settings = Patch_RV2Interaction_Settings.RV2Interaction_Settings.interactions;
             if (pawnA.IsHumanoid() || pawnB.IsHumanoid())
             {
                 if (pawnA.IsHumanoid() && pawnA.story.traits.HasTrait(TraitDefOf.Kind))
-                    mod = 10;
+                    mod = settings.KindOpinionMod;
                 if (pawnB.IsHumanoid() && pawnB.story.traits.HasTrait(TraitDefOf.Kind))
-                    mod += 10;
+                    mod += settings.KindOpinionMod;
+
             }
             if (pawnA.IsHumanoid() && pawnB.IsHumanoid())
-                return pawnA.relations.OpinionOf(pawnB) + mod > 100 ? 100 : pawnA.relations.OpinionOf(pawnB) + mod;
+            {
+                int skillmod = Math.Min(20, Math.Max(pawnA.skills.GetSkill(SkillDefOf.Social).levelInt, pawnB.skills.GetSkill(SkillDefOf.Social).levelInt));
+                mod += settings.SkillOpinionMod * (skillmod/20);
+                return pawnA.relations.OpinionOf(pawnB) + mod;
+            }
 
             if ((!pawnA.IsHumanoid() || !pawnB.IsHumanoid()) && !(!pawnA.IsHumanoid() && !pawnB.IsHumanoid()))
             {
                 if (pawnA.IsHumanoid())
                 {
                     if (pawnB.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Bond) == pawnA)
-                        return 60 + mod;
+                        return 50 + mod;
 
                     if (pawnB.Faction == pawnA.Faction)
-                        return 10 + pawnA.skills.GetSkill(SkillDefOf.Animals).levelInt + mod;
+                        return settings.SkillOpinionMod * (Math.Min(pawnA.skills.GetSkill(SkillDefOf.Animals).levelInt, 20)/20) + mod;
 
                     if (!pawnB.HostileTo(pawnA))
-                        return pawnA.skills.GetSkill(SkillDefOf.Animals).levelInt;
+                        return settings.SkillOpinionMod * (Math.Min(pawnA.skills.GetSkill(SkillDefOf.Animals).levelInt, 20) / 20);
 
                     return 0 + mod;
                 }
                 if (pawnB.IsHumanoid())
                 {
                     if (pawnA.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Bond) == pawnB)
-                        return 60 + mod;
+                        return 50 + mod;
 
                     if (pawnA.Faction == pawnB.Faction)
-                        return 10 + pawnB.skills.GetSkill(SkillDefOf.Animals).levelInt + mod;
+                        return settings.SkillOpinionMod * (Math.Min(pawnB.skills.GetSkill(SkillDefOf.Animals).levelInt, 20) / 20) + mod;
 
                     if (!pawnA.HostileTo(pawnB))
-                        return pawnB.skills.GetSkill(SkillDefOf.Animals).levelInt;
+                        return settings.SkillOpinionMod * (Math.Min(pawnB.skills.GetSkill(SkillDefOf.Animals).levelInt, 20) / 20);
 
                     return 0 + mod;
                 }
