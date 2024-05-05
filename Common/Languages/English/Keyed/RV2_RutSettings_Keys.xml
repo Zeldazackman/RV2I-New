@@ -9,6 +9,8 @@
   <RV2Interaction_Settings_MultiPreyModifier_Tip>Interation odds are lowered if the pred has multiple prey. At 100%, each prey lowers interaction odds by a factor of 1, keeping the total chance for an interaction to the base chance.\n\nNote that preds can potentaly interact with multiple prey at once.</RV2Interaction_Settings_MultiPreyModifier_Tip>
   <RV2Interaction_Settings_OpinionModifier>Opinion modifier</RV2Interaction_Settings_OpinionModifier>  
   <RV2Interaction_Settings_OpinionModifierTip>How much the pred and prey's opinion of each other affect interaction odds. 100% doubles odds at 100 opinion, and halves at -100.</RV2Interaction_Settings_OpinionModifierTip>
+  <RV2Interaction_Settings_BaseOpinionMod>Opinion offset</RV2Interaction_Settings_BaseOpinionMod>  
+  <RV2Interaction_Settings_BaseOpinionMod_Tip>How much to offset the predator and prey's opinion of each other, when determining what interactions to use. High opinion leads to more amicable interactions. Does not affect their base opinions of each other.</RV2Interaction_Settings_BaseOpinionMod_Tip>
   <RV2Interaction_Settings_KindOpinionMod>Kind modifier</RV2Interaction_Settings_KindOpinionMod>  
   <RV2Interaction_Settings_KindOpinionMod_Tip>How much opinion to add if either the pred or prey have the Kind trait.</RV2Interaction_Settings_KindOpinionMod_Tip>
   <RV2Interaction_Settings_SkillOpinionMod>Skill modifier</RV2Interaction_Settings_SkillOpinionMod>  
